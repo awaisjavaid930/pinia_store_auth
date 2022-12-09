@@ -1,4 +1,8 @@
-# Pinia Store Authentication
+# Using Pinia Store with Authenticated Routes Starter Kit
+
+```
+Signup And Signin Authenticated Route Other are Protected Routes
+```
 
 ## Project setup
 ```
