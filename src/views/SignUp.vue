@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div v-if="message">
+            <h3> {{ message }} </h3>
+        </div>
         <form action="" @submit.prevent="signup">
             <input type="email" placeholder="enter your email" v-model="formData.email" /> <br />  <br /> 
             <input type="text" placeholder="enter your password" v-model="formData.password" /> <br />  <br /> 
@@ -13,6 +16,7 @@
     </div>
 </template>
 <script>
+
 import { userAuthStore } from '@/store/user';
 export default {
     name : 'SignUp',
@@ -27,15 +31,21 @@ export default {
                 city_id : '1',
                 zip_code : '54000',
                 role : 'buyer'
-            }
+            },
+            message : ''
         }
     },
     methods: {
         async signup()
         {
             let userAuth = userAuthStore();
-            let userRegister = await userAuth.userSignUp(this.formData);
+            let userSignUp = await userAuth.userSignUp(this.formData);
+            if(userSignUp.status == 200)
+            {
+                this.message = userSignUp.data.message ;
+                this.$router.push("/signin");
+            }
         }
-    },
+    }
 }
 </script>
