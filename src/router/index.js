@@ -37,9 +37,8 @@ router.beforeEach((to) => {
     const authRequired = !publicPages.includes(to.path);
     const auth = userAuthStore();
   if (authRequired && !auth.user) {
-      console.log("dfd")
-        auth.returnUrl = to.fullPath;
-        return '/signin';
+      auth.returnUrl = to.fullPath;
+      return '/signin';
     }
 
 })
