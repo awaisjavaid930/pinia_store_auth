@@ -1,4 +1,4 @@
-# authenticate
+# Pinia Store Authentication
 
 ## Project setup
 ```
