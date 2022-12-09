@@ -5,7 +5,8 @@ export const userAuthStore = defineStore('userAuth', {
     
     state: () => {
         return {
-            token : null
+            user : null, 
+            token: null
         }
     },
 
@@ -22,9 +23,17 @@ export const userAuthStore = defineStore('userAuth', {
             
         },
 
-        userSignIn()
+        userSignIn(data)
         {
-            console.log("User Sign In")
+            return axios.post(process.env.VUE_APP_API_URL + 'api/login', data)
+                .then(response => {
+                    this.token = response.data.data.token;
+                    this.isLoggedIn = true;
+                    return Promise.resolve(response.data);
+                })
+                .catch(error => {
+                    console.log(error)
+                })
         }
     }
 })

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import { userAuthStore } from '@/store/user';
 
 const routes = [
   {
@@ -24,9 +25,22 @@ const routes = [
   }
 ]
 
+
+
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to) => {
+    const publicPages = ['/signup', '/signin'];
+    const authRequired = !publicPages.includes(to.path);
+    const auth = userAuthStore();
+  if (authRequired && !auth.user) {
+      auth.returnUrl = to.fullPath;
+      return '/signin';
+    }
+
 })
 
 export default router
