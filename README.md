@@ -4,6 +4,13 @@
 Signup And Signin Authenticated Route Other are Protected Routes
 ```
 
+## Tailwind CSS run using this CMD
+
+```
+npx tailwindcss -i ./src/input.css -o ./tailwind/output.css --watch
+```
+
+
 ## Project setup
 ```
 npm install
