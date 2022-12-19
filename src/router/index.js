@@ -9,9 +9,9 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/about',
-    name: 'about',
-    component: () => import('../views/AboutView.vue')
+    path: '/dashboard',
+    name: 'dashboard',
+    component: () => import('../views/DashboardView.vue')
   },
   {
     path: '/signup',
@@ -24,8 +24,6 @@ const routes = [
     component: () => import('../views/SignIn.vue')
   }
 ]
-
-
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
