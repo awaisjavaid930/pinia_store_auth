@@ -50,12 +50,13 @@ export default {
     methods: {
         async login() {
             let userAuth = await userAuthStore();
-            userAuth.userSignIn(this.formData).then(response => {
-                if (response.status == 200) {
-                    localStorage.setItem("token", response.data.token);
-                    this.$router.push("/about");
-                }
-            });
+            userAuth.userSignIn(this.formData)
+                .then(response => {
+                    if (response.status == 200) {
+                        localStorage.setItem("token", response.data.token);
+                        this.$router.push({ path: '/dashboard' });
+                    }
+                });
         }
     }
 };

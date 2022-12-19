@@ -32,7 +32,22 @@ export const userAuthStore = defineStore('userAuth', {
                     return Promise.resolve(response.data);
                 })
                 .catch(error => {
-                    console.log(error)
+                    return Promise.resolve(error);
+                })
+        },
+        
+        async getItem(url) {
+            return axios.get(process.env.VUE_APP_API_URL + 'api/'+ url , {
+                    headers: {
+                        Authorization: 'Bearer ' + localStorage.getItem('token'),
+                    } 
+                })
+                .then(response => {
+                    return Promise.resolve(response.data);
+                })
+                .catch(err => {
+                    return Promise.resolve(err);
+                    
                 })
         }
     }
