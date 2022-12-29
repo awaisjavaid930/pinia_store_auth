@@ -1,23 +1,39 @@
 <template>
     <div class="container mx-auto p-4">
-
-        <div class="grid grid-cols-6 gap-3">
-            <div class="col-span-1" v-for="item in items" :key="item">
-                <img class="w-full" :src="base_url + '' + item.image.url" :alt="item.image.name"
-                    style="height: 100px; width: 100px;" @click="getRecords(item.id)">
-
-                <div class="px-6 py-4">
-                    <div class="font-bold text-xl mb-2"> {{ item.name }} </div>
+        <div class="grid grid-cols-3 gap-4">
+            <div class="max-w-sm rounded overflow-hidden shadow-lg row-span-4" v-for="item in items" :key="item">
+                <img class="inline" style="width: 33%;" :src="base_url + '' + item.image.url" :alt="item.image.name">
+                <div class="px-6 py-4 inline-block">
+                    <div class="font-bold text-xl mb-2" @click="getRecords(item.id)">{{ item.name }}</div>
                 </div>
             </div>
-        </div>
+        </div> <br /> <br />
 
-        <div>
-            <div class="col-span-2" v-for="product in products" :key="product" @click="changeRoute(product.id)">
-                <div v-for="image in product.images" :key="image">
-                    <img :src="base_url + image.url" alt="" srcset="" style="width: 50px; height: 50px;">
+        <div class="grid grid-cols-3 gap-4">
+            <div class="max-w-sm rounded overflow-hidden shadow-lg" v-for="product in products" :key="product"
+                @click="changeRoute(product.id)">
+                <span v-for="image in product.images" :key="image">
+                    <img class="inline" style="width: 33%;" :src="base_url + '' + image.url" :alt="image.name">
+                </span>
+                <div class="px-6 py-4">
+                    <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+                    <p class="text-gray-700 text-base" @click="changeRoute(product.id)">
+                        {{ product.description }}
+                    </p>
                 </div>
-                {{ product.name }}
+                <div class="px-6 pt-4 pb-2">
+                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                        {{ product.price + ' PKR' }}
+                    </span>
+                    <span
+                        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                        {{ product.location}}
+                    </span>
+                    <span
+                        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                        {{ product.year }}
+                    </span>
+                </div>
             </div>
         </div>
     </div>
@@ -49,7 +65,7 @@ export default {
             this.products = this.items[id].products;
         },
         changeRoute(productId) {
-            this.$router.push('/product/detail/'+productId)
+            this.$router.push('/product/detail/' + productId)
         }
     },
     mounted() {
