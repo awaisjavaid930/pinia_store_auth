@@ -35,6 +35,13 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
+### By Using this Repo Vue Js Developer can Add Record By using Pinia Store and Get Record By Using Pinia Store Method 
+
+```
+getItem() Pinia Store Method Get Record  from any API 
+```
 
 
-###  pinia_store_auth Repoistery
+```
+saveItem() Pinia Store Method Save the Records in Database 
+```
