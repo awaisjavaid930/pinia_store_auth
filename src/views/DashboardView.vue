@@ -13,7 +13,7 @@
         </div>
 
         <div>
-            <div class="col-span-2" v-for="product in products" :key="product">
+            <div class="col-span-2" v-for="product in products" :key="product" @click="changeRoute(product.id)">
                 <div v-for="image in product.images" :key="image">
                     <img :src="base_url + image.url" alt="" srcset="" style="width: 50px; height: 50px;">
                 </div>
@@ -47,6 +47,9 @@ export default {
         },
         getRecords(id) {
             this.products = this.items[id].products;
+        },
+        changeRoute(productId) {
+            this.$router.push('/product/detail/'+productId)
         }
     },
     mounted() {
