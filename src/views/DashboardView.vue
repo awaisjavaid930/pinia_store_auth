@@ -2,7 +2,7 @@
     <div class="container mx-auto p-4">
         <div class="grid grid-cols-3 gap-4">
             <div class="max-w-sm rounded overflow-hidden shadow-lg row-span-4" v-for="item in items" :key="item">
-                <img class="inline" style="width: 33%;" :src="base_url + '' + item.image.url" :alt="item.image.name">
+                <img class="inline" style="width: 33%;" :src="base_url + '' + item.image.url" :alt="item.image.name" @click="getRecords(item.id)">
                 <div class="px-6 py-4 inline-block">
                     <div class="font-bold text-xl mb-2" @click="getRecords(item.id)">{{ item.name }}</div>
                 </div>
@@ -23,15 +23,15 @@
                 </div>
                 <div class="px-6 pt-4 pb-2">
                     <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                        {{ product.price + ' PKR' }}
+                        #{{ product.price + ' PKR' }}
                     </span>
                     <span
                         class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                        {{ product.location}}
+                        #{{ product.location}}
                     </span>
                     <span
                         class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                        {{ product.year }}
+                        #{{ product.year }}
                     </span>
                 </div>
             </div>
@@ -58,7 +58,6 @@ export default {
                 .then(response => {
                     this.items = response.data;
                     this.products = this.items[0].products;
-                    console.log(this.products)
                 });
         },
         getRecords(id) {
