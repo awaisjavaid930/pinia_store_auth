@@ -1,5 +1,6 @@
 <template>
     <div>
+        <button class="btn btn-primary" @click="addBid">Add Bid</button>
         <div class="max-w-sm w-full ">
             <div v-for="image in images" :key="image">
                 <figure>
@@ -63,6 +64,21 @@ export default {
                     console.log(this.data)
                     this.bids = response.data.bids;
                     this.images = response.data.images;
+                })
+        },
+        addBid()
+        {
+            let data = {
+                bid_amount : 204 ,
+                product_id :  this.$route.params.id
+            }
+            let userAuth = userAuthStore();
+            userAuth.saveItem('buyer/store/bid' , data)
+                .then(response => {
+                console.log(response.status)
+                    if (response.status == 200) {
+                        this.getProductDetail();
+                    }
                 })
         }
     },

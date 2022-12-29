@@ -49,6 +49,17 @@ export const userAuthStore = defineStore('userAuth', {
                     return Promise.resolve(err);
                     
                 })
+        },
+        
+        async saveItem(url, data) {
+            return axios.post(process.env.VUE_APP_API_URL + 'api/'+ url  , data ,{
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('token'),
+                } 
+            })
+            .then(response => {
+                return Promise.resolve(response);
+            })
         }
     }
 })
