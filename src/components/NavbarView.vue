@@ -16,6 +16,7 @@
             </div>
         </nav>
         <router-view />
+        
     </div>
 </template>
 
@@ -50,7 +51,7 @@ export default {
         signout()
         {
             localStorage.setItem('token',null)
-            this.$router.push('signin')
+            this.$router.push('/signin')
         }
     },
 }

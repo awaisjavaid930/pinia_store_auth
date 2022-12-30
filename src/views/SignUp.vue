@@ -64,9 +64,7 @@
                         <select
                             class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             id="grid-state" v-model="formData.city_id">
-                            <option value="1">New Mexico</option>
-                            <option value="1">Missouri</option>
-                            <option value="1">Texas</option>
+                            <option v-for="city in cities" :key="city" :value="city.id" >{{  city.name }}</option>
                         </select>
                         <div
                             class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -107,7 +105,8 @@ export default {
                 zip_code: "54000",
                 role: "buyer"
             },
-            message: ""
+            message: "",
+            cities: []
         };
     },
     methods: {
@@ -118,7 +117,17 @@ export default {
                 this.message = userSignUp.data.message;
                 this.$router.push("/signin");
             }
+        },
+        async getCity() {
+            let userAuth = userAuthStore();
+            await userAuth.getItem('cities')
+            .then(response => {
+                this.cities = response.data;
+            })
         }
-    }
+    },
+    mounted() {
+        return this.getCity();
+    },
 };
 </script>
