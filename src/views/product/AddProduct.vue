@@ -11,8 +11,10 @@
                             class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             id="grid-state" v-model="formData.category_id">
                             <option value="1">Commerical</option>
-                            <option value="1">Commerical2</option>
-                            <option value="1">Commerical3</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                         </select>
                         <div
                             class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -40,7 +42,7 @@
                     </label>
                     <input v-model="formData.price"
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="grid-last-name" type="text" placeholder="price">
+                        id="grid-last-name" type="number" placeholder="price">
                 </div>
             </div>
             <div class="flex flex-wrap -mx-3 mb-6">
