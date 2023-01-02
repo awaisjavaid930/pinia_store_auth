@@ -24,7 +24,7 @@ getItem() Pinia Store Method Get Record  from any API
 ```
 
 
-## By Using this Store Mehtod getItem() you can fetch Records
+## By Using this Store Mehtod saveItem() you can Save Record into DB
 
 ```
 saveItem() Pinia Store Method Save the Records in Database 

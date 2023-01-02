@@ -9,9 +9,9 @@
                     <router-link v-for="link in links" :key="link" :to="link.link" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-2">
                         {{  link.title }}
                     </router-link>
-                    <button v-if="token != 'null'" @click="signout" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-2">
+                    <!-- <button v-if="token != 'null'" @click="signout" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-2">
                         SIGN OUT
-                    </button>
+                    </button> -->
                 </div>
             </div>
         </nav>
@@ -27,7 +27,8 @@ export default {
     data() {
         return {
             token : localStorage.getItem('token'),
-            links : [
+            links : 
+            [
                 {
                     title : 'Home',
                     link : '/signin'
@@ -44,13 +45,32 @@ export default {
                     title : 'SIGN UP',
                     link : '/signup'
                 },
-            ]
+            ],
+            logOutItems : 
+            [
+                {
+                    title : 'Home',
+                    link : '/signin'
+                },
+                {
+                    title : 'SIGN IN',
+                    link : '/signin'
+                },
+                {
+                    title : 'SIGN UP',
+                    link : '/signup'
+                },
+            ],
         }
     },
     methods: {
         signout()
         {
             localStorage.setItem('token',null)
+            this.links = [];
+            this.$nextTick(() => {
+                this.links = this.logOutItems
+            });
             this.$router.push('/signin')
         }
     },
