@@ -38,6 +38,10 @@ export default {
                     link : '/dashboard'
                 },
                 {
+                    title : 'Category',
+                    link : '/category'
+                },
+                {
                     title : 'SIGN IN',
                     link : '/signin'
                 },
