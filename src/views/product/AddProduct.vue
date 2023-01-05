@@ -1,6 +1,6 @@
 <template>
     <div class="container mx-auto p-4">
-        <form class="w-full max-w-lg"  @submit.prevent="saveProduct">
+        <form class="w-full max-w-lg" @submit.prevent="saveProduct">
             <div class="flex flex-wrap -mx-3 mb-6">
                 <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
@@ -10,11 +10,9 @@
                         <select
                             class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             id="grid-state" v-model="formData.category_id">
-                            <option value="1">Commerical</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
+                            <option v-for="category in formData.categories" :key="category" :value="category.id">
+                            {{ category.name }}
+                            </option>
                         </select>
                         <div
                             class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -80,7 +78,7 @@
                         for="grid-last-name">
                         Quantity
                     </label>
-                    <input  v-model="formData.quantity"
+                    <input v-model="formData.quantity"
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                         id="grid-last-name" type="number" placeholder="quantity">
                 </div>
@@ -100,7 +98,7 @@
                         for="grid-last-name">
                         File
                     </label>
-                    <input  type="file" class="file:border file:border-solid" @change="uploadImage" />
+                    <input type="file" class="file:border file:border-solid" @change="uploadImage" />
 
                 </div>
             </div>
@@ -126,27 +124,37 @@ export default {
                 description: '',
                 category_id: '',
                 images: [],
+                categories: []
             }
         }
     },
     methods: {
-        saveProduct() {
+        async saveProduct() {
             let userAuth = userAuthStore();
-            userAuth.saveItem('admin/product' , this.formData)
-                .then(response => {
-                    if(response.data.status == 200) {
-                        this.$router.push('/dashboard');
-                    }
-                })
+            await userAuth.saveItem('admin/product', this.formData)
+            .then(response => {
+                if (response.data.status == 200) {
+                    this.$router.push('/dashboard');
+                }
+            })
         },
         uploadImage(e) {
             const reader = new FileReader()
-            reader.readAsDataURL( e.target.files[0])
+            reader.readAsDataURL(e.target.files[0])
             reader.onload = e => {
-               this.formData.images[0] = e.target.result.replace('data:image/jpeg;base64,', '')
+                this.formData.images[0] = e.target.result.replace('data:image/jpeg;base64,', '')
             }
+        },
+        getCategory() {
+            let userAuth = userAuthStore();
+            userAuth.getItem('admin/category')
+                .then(response => {
+                    this.formData.categories = response.data;
+                })
         }
     },
-
+    mounted() {
+        return this.getCategory();
+    }
 }
 </script>
