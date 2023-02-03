@@ -1,7 +1,14 @@
 <template>
     <div class="container mx-auto m-5">
-        <a href="#" class="no-underline text-center text-2xl">Authentication Using Vue, Pinia, and Tailwind CSS</a> <br /><br /> 
+        <a href="#" class="no-underline text-center text-2xl">Authentication Using Vue, Pinia, and Tailwind CSS</a>
+        <br /><br />
         <form class="w-full max-w-sm " @submit.prevent="login">
+
+            <div v-if="message" class="bg-red-100 border-red-400 text-red-700 border px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Alert!</strong> <br />
+                <span class="block sm:inline">{{ message  }}</span>
+            </div>
+
             <div class="md:flex md:items-center mb-6">
                 <div class="md:w-1/3">
                     <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
@@ -43,8 +50,9 @@ export default {
         return {
             formData: {
                 email: "awaisjavaid980@gmail.com",
-                password: "password"
-            }
+                password: "password",
+            },
+            message : ''
         };
     },
     methods: {
@@ -55,6 +63,9 @@ export default {
                     if (response.status == 200) {
                         localStorage.setItem("token", response.data.token);
                         this.$router.push({ path: '/dashboard' });
+                    } else {
+                        this.message = response.message
+                        // console.log(this.message)
                     }
                 });
         }
